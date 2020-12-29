@@ -1,0 +1,170 @@
+% latex table generated in R 4.0.2 by xtable 1.8-4 package
+% Mon Nov  9 15:16:33 2020
+\begin{table}[ht]
+\centering
+\begin{tabular}{llrr}
+  \hline
+Species & Site & NYears & NObs \\ 
+  \hline
+Agapostemon texanus & S2* &   3 &   4 \\ 
+  Andrena candida & S51 &   3 &   4 \\ 
+  Anthidiellum notatum robertsoni & S41 &   3 &  31 \\ 
+  Anthophora urbana & S21 &   4 &  19 \\ 
+  Anthophora urbana & S41 &   3 &   5 \\ 
+  Anthophora urbana & S43* &   4 &   5 \\ 
+  Bombus californicus & S43* &   8 &  49 \\ 
+  Bombus melanopygus & S2* &   3 &   3 \\ 
+  Bombus vosnesenskii & S21 &   3 &  20 \\ 
+  Bombus vosnesenskii & S43* &   6 &  73 \\ 
+  Ceratina acantha & S2* &   6 &  73 \\ 
+  Ceratina acantha & S20 &   3 &   8 \\ 
+  Ceratina acantha & S22 &   3 &  72 \\ 
+  Ceratina acantha & S33* &   3 &  10 \\ 
+  Ceratina acantha & S47 &   3 &  32 \\ 
+  Ceratina acantha & S59 &   7 &  82 \\ 
+  Ceratina acantha & S60 &   6 &  84 \\ 
+  Ceratina dallatorreana & S13* &   3 &   8 \\ 
+  Ceratina dallatorreana & S20 &   3 &   7 \\ 
+  Ceratina dallatorreana & S56* &   3 &  15 \\ 
+  Ceratina nanula & S20 &   6 &  35 \\ 
+  Diadasia enavata & S56* &   3 &   4 \\ 
+  Halictus ligatus & S2* &   9 &  73 \\ 
+  Halictus ligatus & S5 &   4 &  57 \\ 
+  Halictus ligatus & S6 &   3 &  13 \\ 
+  Halictus ligatus & S13* &   6 &  34 \\ 
+  Halictus ligatus & S22 &   3 &  20 \\ 
+  Halictus ligatus & S27 &   3 &  88 \\ 
+  Halictus ligatus & S28 &   5 &  36 \\ 
+  Halictus ligatus & S29 &   4 &  61 \\ 
+  Halictus ligatus & S33* &   7 &  50 \\ 
+  Halictus ligatus & S34 &   3 &  21 \\ 
+  Halictus ligatus & S43* &   8 &  48 \\ 
+  Halictus ligatus & S46 &   3 &  74 \\ 
+  Halictus ligatus & S47 &   4 &  15 \\ 
+  Halictus ligatus & S51 &   4 &  53 \\ 
+  Halictus ligatus & S52 &   3 &  73 \\ 
+  Halictus ligatus & S56* &   4 &  33 \\ 
+  Halictus ligatus & S57 &   3 &   5 \\ 
+  Halictus ligatus & S59 &   8 &  93 \\ 
+  Halictus ligatus & S60 &   5 &  25 \\ 
+  Halictus tripartitus & S2* &   9 &  49 \\ 
+  Halictus tripartitus & S5 &   4 &  35 \\ 
+  Halictus tripartitus & S6 &   3 &  68 \\ 
+  Halictus tripartitus & S13* &   7 & 104 \\ 
+  Halictus tripartitus & S17 &   3 & 175 \\ 
+  Halictus tripartitus & S20 &   6 & 210 \\ 
+  Halictus tripartitus & S21 &   5 &  88 \\ 
+  Halictus tripartitus & S22 &   3 &  31 \\ 
+  Halictus tripartitus & S25 &   3 &  39 \\ 
+  Halictus tripartitus & S27 &   3 &  74 \\ 
+  Halictus tripartitus & S28 &   5 & 110 \\ 
+  Halictus tripartitus & S29 &   4 &  24 \\ 
+  Halictus tripartitus & S32 &   3 &  60 \\ 
+  Halictus tripartitus & S33* &   7 &  71 \\ 
+  Halictus tripartitus & S34 &   3 &  87 \\ 
+  Halictus tripartitus & S41 &   3 &  44 \\ 
+  Halictus tripartitus & S43* &   8 & 846 \\ 
+  Halictus tripartitus & S46 &   3 &  95 \\ 
+  Halictus tripartitus & S47 &   3 &  19 \\ 
+  Halictus tripartitus & S49 &   3 &  91 \\ 
+  Halictus tripartitus & S51 &   5 &  74 \\ 
+  Halictus tripartitus & S52 &   3 & 101 \\ 
+  Halictus tripartitus & S56* &   6 &  78 \\ 
+  Halictus tripartitus & S57 &   3 &  52 \\ 
+  Halictus tripartitus & S59 &   8 & 495 \\ 
+  Halictus tripartitus & S60 &   6 &  52 \\ 
+  Hylaeus conspicuus & S17 &   3 &  19 \\ 
+  Hylaeus mesillae & S2* &   3 &  12 \\ 
+  Hylaeus mesillae & S5 &   3 &   6 \\ 
+  Hylaeus mesillae & S13* &   6 &  25 \\ 
+  Hylaeus mesillae & S17 &   3 &  76 \\ 
+  Hylaeus mesillae & S29 &   4 &  25 \\ 
+  Hylaeus mesillae & S33* &   4 &  16 \\ 
+  Hylaeus mesillae & S41 &   3 &  60 \\ 
+  Hylaeus mesillae & S43* &   7 &  48 \\ 
+  Hylaeus mesillae & S47 &   4 &  47 \\ 
+  Hylaeus mesillae & S59 &   3 &   7 \\ 
+  Hylaeus mesillae & S60 &   3 &   4 \\ 
+  Lasioglossum (Dialictus) brunneiiventre & S41 &   3 &  33 \\ 
+  Lasioglossum (Dialictus) diversopunctatum & S2* &   3 &  13 \\ 
+  Lasioglossum (Dialictus) diversopunctatum & S21 &   3 &   3 \\ 
+  Lasioglossum (Dialictus) diversopunctatum & S33* &   5 &  25 \\ 
+  Lasioglossum (Dialictus) diversopunctatum & S59 &   4 &   8 \\ 
+  Lasioglossum (Dialictus) impavidum & S2* &   3 &   3 \\ 
+  Lasioglossum (Dialictus) impavidum & S5 &   3 &   9 \\ 
+  Lasioglossum (Dialictus) incompletum & S2* &   9 & 119 \\ 
+  Lasioglossum (Dialictus) incompletum & S5 &   4 &  50 \\ 
+  Lasioglossum (Dialictus) incompletum & S6 &   3 &  33 \\ 
+  Lasioglossum (Dialictus) incompletum & S13* &   7 & 147 \\ 
+  Lasioglossum (Dialictus) incompletum & S17 &   3 &  81 \\ 
+  Lasioglossum (Dialictus) incompletum & S20 &   5 & 104 \\ 
+  Lasioglossum (Dialictus) incompletum & S21 &   5 & 153 \\ 
+  Lasioglossum (Dialictus) incompletum & S22 &   3 & 147 \\ 
+  Lasioglossum (Dialictus) incompletum & S25 &   3 &  95 \\ 
+  Lasioglossum (Dialictus) incompletum & S27 &   3 &  62 \\ 
+  Lasioglossum (Dialictus) incompletum & S28 &   5 &  78 \\ 
+  Lasioglossum (Dialictus) incompletum & S29 &   4 &  43 \\ 
+  Lasioglossum (Dialictus) incompletum & S32 &   3 &  71 \\ 
+  Lasioglossum (Dialictus) incompletum & S33* &   7 & 289 \\ 
+  Lasioglossum (Dialictus) incompletum & S34 &   3 &  63 \\ 
+  Lasioglossum (Dialictus) incompletum & S41 &   3 &  44 \\ 
+  Lasioglossum (Dialictus) incompletum & S43* &   7 &  74 \\ 
+  Lasioglossum (Dialictus) incompletum & S46 &   3 & 116 \\ 
+  Lasioglossum (Dialictus) incompletum & S47 &   4 & 113 \\ 
+  Lasioglossum (Dialictus) incompletum & S49 &   3 &  55 \\ 
+  Lasioglossum (Dialictus) incompletum & S51 &   5 &  98 \\ 
+  Lasioglossum (Dialictus) incompletum & S52 &   3 & 168 \\ 
+  Lasioglossum (Dialictus) incompletum & S56* &   6 & 130 \\ 
+  Lasioglossum (Dialictus) incompletum & S57 &   3 &  45 \\ 
+  Lasioglossum (Dialictus) incompletum & S59 &   8 & 132 \\ 
+  Lasioglossum (Dialictus) incompletum & S60 &   6 &  61 \\ 
+  Lasioglossum (Dialictus) tegulare group & S2* &   7 &  25 \\ 
+  Lasioglossum (Dialictus) tegulare group & S5 &   3 &   9 \\ 
+  Lasioglossum (Dialictus) tegulare group & S6 &   3 &   5 \\ 
+  Lasioglossum (Dialictus) tegulare group & S13* &   3 &  23 \\ 
+  Lasioglossum (Dialictus) tegulare group & S21 &   3 &   7 \\ 
+  Lasioglossum (Dialictus) tegulare group & S25 &   3 &   3 \\ 
+  Lasioglossum (Dialictus) tegulare group & S28 &   3 &  10 \\ 
+  Lasioglossum (Dialictus) tegulare group & S29 &   3 &   5 \\ 
+  Lasioglossum (Dialictus) tegulare group & S33* &   7 &  32 \\ 
+  Lasioglossum (Dialictus) tegulare group & S41 &   3 &  39 \\ 
+  Lasioglossum (Dialictus) tegulare group & S46 &   3 &  21 \\ 
+  Lasioglossum (Dialictus) tegulare group & S47 &   3 &  27 \\ 
+  Lasioglossum (Dialictus) tegulare group & S59 &   5 &  22 \\ 
+  Lasioglossum (Dialictus) tegulare group & S60 &   5 &   7 \\ 
+  Megachile angelarum & S43* &   3 &   8 \\ 
+  Megachile apicalis & S27 &   3 &   4 \\ 
+  Megachile apicalis & S33* &   4 &   5 \\ 
+  Megachile apicalis & S41 &   3 &   8 \\ 
+  Megachile apicalis & S43* &   4 &   5 \\ 
+  Megachile apicalis & S56* &   4 &   5 \\ 
+  Megachile apicalis & S59 &   6 &  11 \\ 
+  Megachile apicalis & S60 &   3 &  15 \\ 
+  Megachile gentilis & S2* &   4 &   4 \\ 
+  Megachile gentilis & S43* &   6 &  11 \\ 
+  Megachile onobrychidis & S5 &   3 &   4 \\ 
+  Megachile onobrychidis & S25 &   3 &   5 \\ 
+  Megachile onobrychidis & S43* &   7 &  32 \\ 
+  Megachile rotundata & S21 &   3 &   8 \\ 
+  Melissodes agilis & S43* &   3 &  11 \\ 
+  Melissodes agilis & S47 &   3 &   3 \\ 
+  Melissodes lupina & S2* &   4 &   5 \\ 
+  Melissodes lupina & S5 &   3 &  11 \\ 
+  Melissodes lupina & S13* &   4 &  14 \\ 
+  Melissodes lupina & S20 &   4 &   8 \\ 
+  Melissodes lupina & S28 &   3 &   5 \\ 
+  Melissodes lupina & S33* &   4 &   5 \\ 
+  Melissodes lupina & S43* &   4 &  17 \\ 
+  Melissodes lupina & S51 &   4 &  19 \\ 
+  Melissodes lupina & S52 &   3 &  14 \\ 
+  Melissodes lupina & S56* &   4 &  14 \\ 
+  Melissodes lupina & S59 &   7 &  28 \\ 
+  Melissodes lupina & S60 &   3 &   6 \\ 
+  Melissodes robustior & S43* &   5 &  17 \\ 
+  Melissodes tepida timberlakei & S2* &   3 &   3 \\ 
+  Melissodes tepida timberlakei & S21 &   4 &   8 \\ 
+  Osmia gaudiosa & S33* &   4 &   6 \\ 
+  Xylocopa tabaniformis orpifex & S21 &   3 &  16 \\ 
+   \hline
+\end{tabular}
+\end{table}

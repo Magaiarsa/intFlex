@@ -1,0 +1,14 @@
+% latex table generated in R 4.0.2 by xtable 1.8-4 package
+% Thu Nov 26 11:03:37 2020
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & 1 & 2 & 3 \\ 
+  \hline
+1 & 1.00 & -0.35 & -0.28 \\ 
+  2 & -0.35 & 1.00 & 0.10 \\ 
+  3 & -0.28 & 0.10 & 1.00 \\ 
+   \hline
+\end{tabular}
+\end{table}

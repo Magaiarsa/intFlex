@@ -1,0 +1,195 @@
+---
+title: "Pollinators more flexible in their interaction patterns persist for longer across a landscape"
+author: "Marília P. Gaiarsa"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    self_contained: no
+  pdf_document: default
+  linkcolor: blue
+header-includes: \usepackage{float}
+geometry: "left=3cm,right=3cm,top=2cm,bottom=2cm"
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# Overview 
+We we examine species interaction patterns using a long-term plant-pollinator network assembly from the central valley of California. We propose three complementary ways of measuring species' flexibility across ecological scales, and test whether interaction flexibility at different scales enables species to have higher occupancy across the landscape. We then examine which traits explain flexibility and thus, contribute indirectly to occupancy. 
+
+All analyses are in the analyses folder within the github repo [speciesRoles](https://github.com/lponisio/speciesRoles/tree/master/analysis). The purpose of this document is to go through the main scripts for each analysis individually. We used R (version 3.5.1), nimble (version 0.7.1), and piecewiseSEM (version 2.1.0).
+
+All analyses are executable from the main.sh file, and the necessary packages from the packages.sh file. 
+
+## Variability 
+The code to calculate variability is inside *speciesRoles/analysis/variability*. We calculated three measures of interaction flexibility for each species, at each site, across years: partner, role, and structural flexibility. We only considered species that were seen at least three times. 
+
+### Partner flexibility
+We modified methods for calculating $\beta$-diversity to calculate the flexibility of interaction partners for each species across years at a site (Fig. 1a of the manuscript). We use the multivariate dispersion method considering null communities (calculated in the *1nulls.R* script) to control for alpha diversity.  Our null model reshuffles interactions within communities. Then, the function *calcBetaStatus* is executed in the *2partner.R* script to calculate the pairwise dissimilarity between survey years at a site, using a dissimilarity estimator that incorporates species abundances, while also accounting for unobserved species (check the `vegdist` function of the `vegan` package). 
+
+```{r, eval = FALSE}
+dis <- mapply(function(a, b, c, d)
+    calcBetaStatus(comm= a, ## observed communities
+                   status= b, ## vector of site types
+                   dis.method, ## dissimilarity metric (chao)
+                   nulls=c, ## null communities
+                   occ=binary, ## binary or abundance weighted
+                   years=d, ## calculate beta div within
+                   sub=type,
+                   zscore=FALSE), ## use Chase method not zscores
+    a=comm$comm,
+    b=comm$status,
+    c= nulls,
+    d= comm$comm,
+    SIMPLIFY=FALSE)
+```
+
+As our measure of partner flexibility, we then calculated the coefficient of variation of the dissimilarity for each species at each site, across years:
+
+```{r, echo=FALSE, message=FALSE}
+load("~/Dropbox/speciesRoles/analysis/variability/saved/partner.RData")
+head(partner.var[,c(1,2,3)])
+```
+
+### Motif flexibility
+We calculate motif flexibility in the *motif.R* script. First, we calculated species' motif position using the `node_positions` function from the `bmotif` package for all networks (nets) included in the analysis: 
+
+```{r, eval=FALSE}
+## calculating the motif position 
+calc.motif <- function(x) {
+  node_positions(x, level="columns", 
+                           #six_node = TRUE,
+                           weights_method = "mean_motifweights", 
+                           weights_combine = "mean")}
+
+motifs.all <- lapply(nets, calc.motif)
+```
+
+Because weighted methods are not available for six node motifs we considered the five node motifs to be able to include weights, resulting in 46 unique node positions for each species, in each network. Each species in each network has a $46$ dimensional vector informing the frequency with which the species occurs in each position. Thus, for each species at each site, each point represents the role of species in n-dimensional motif space in a particular year, where each dimension is the frequency with which the species occurs in a particular position within a motif. We then calculated the variability in motif positions of each species (motif flexibility) as the volume of the convex hull around the points in motif space: 
+
+```{r, eval=FALSE}
+## for each site and species we created a "community matrix" with years as rows and motif positions as columns
+beta.spp <- betadisper(vegdist(comu, na.rm = TRUE, method = "bray"), 
+                group=rep("all", nrow(comu)), 
+                type="centroid")
+
+## then we measured the area of polygon
+area.motif.dist <- lapply(beta.spp, function(x) areapl(x$vectors))
+````
+
+Two species were problematic in one of the sites: *Andrena candida* (Rominger) and *Bombus melanopygus* (Barger). They were both seen three years, but in two of the years they only interacted with one plant species, that no one else interacted. Thus, we assigned them a value of 0 variability. 
+
+### Structural variability
+We evaluated how much each species contributes to the maintenance of network structure. For each site and each year, we calculated how much each species contributes to network nestedness (\textit{cnodf}) using the , `nestedcontribution` function from the `bipartite` package (see the *speciesRoles/dataPrep/dataPrep.R* script). We then calculated the mean and the coefficient of variation of \textit{cnodf} values for each species ate each site, across years (see the paper for details) in the *4nestedContr.R* script.
+
+```{r, eval = FALSE}
+## calculating mean and sd per species per site
+contr.nodf.spp <- contr.nodf %>%
+  group_by(GenusSpecies, Site)  %>%
+  summarize(cnodf.cv = cv(nestedcontribution),
+            cnodf.Mean = mean(nestedcontribution, na.rm=TRUE))
+```
+
+```{r, echo=FALSE, message=FALSE}
+load("/Users/magaiarsa/Dropbox/speciesRoles/analysis/variability/saved/cnodf.RData")
+head(cnodf.var[!is.na(cnodf.var$cnodf.cv),c(1:3,5)])
+```
+
+## Occupancy
+We first calculated flexibility for species that were seen at least three times in the landscape, totaling $37$ species in N=$39$ different sites. In *speciesRoles/analysis/occupancy/src/initialize.R* are all the functions and scripts that prepare the data for the occupancy model, and the script *speciesRoles/analysis/occupancy/1runModels.R* runs the model. To run the MCMC in order to estimate the model coefficients, we use the NIMBLE R package. Because Nimble is constantly being updated, the code below installs the version used in our analyses. 
+
+```{r, eval=FALSE}
+library(devtools)
+install_github("nimble-dev/nimble", ref = "v0.7.1", subdir = "packages/nimble")
+library(nimble)
+```
+
+To explore if interaction flexibility confers advantages to populations we built a model including all interaction flexibilities for all species seen at least three times across the landscape (N=$37$). We calculated species colonization and persistence for each species at each site over $10$ years (2006-2015) using a multi-season, multi-species occupancy model. We modeled the probability of occupancy for species \textit{i} at site \textit{j} as a function of colonization ($\gamma_{ij}$) and persistence ($\phi_{ij}$), including a random intercept of species and explanatory variables for the flexibility across scales.  We then calculated the average equilibrium occupancy across the landscape as $$\gamma_{ij}/(1-\phi_{ij} + \gamma_{ij})$$
+
+The code below is an excerpt from the *1runModels.R* script. 
+
+```{r, eval=FALSE}
+type <- "all"
+## define params based on type of model 
+ms.ms.occ <- setModel(type)
+  model.input <- setup(type, model.input)
+  ms.ms.model <- nimbleModel(
+    code = ms.ms.occ,
+    constants = model.input$constants,
+    data = model.input$data,
+    inits = model.input$inits,
+    check = FALSE,
+    calculate = FALSE
+  )
+  C.model <- compileNimble(ms.ms.model)
+  ## configure and build mcmc
+    mcmc.spec <- configureMCMC(ms.ms.model,
+                               print = FALSE,
+                               monitors =
+                                   C.model$getNodeNames(stochOnly = TRUE,
+                                                        includeData = FALSE),
+                               enableWAIC = TRUE)
+    mcmc <- buildMCMC(mcmc.spec,
+                      enableWAIC = TRUE)
+    C.mcmc <- compileNimble(mcmc, project = ms.ms.model)
+    ## run model
+    ms.ms.nimble <- runMCMC(C.mcmc,
+                            niter = niter,
+                            nchains = nchain,
+                            nburnin = burnin,
+                            WAIC=TRUE)
+    runMCMCcheckChains(ms.ms.nimble$samples, type = type)
+    ## saves output
+    save(ms.ms.nimble, model.input,
+         file = file.path(save.dir,
+                          sprintf("ms-ms-samples-%s.Rdata",
+                                  type)))
+```
+
+We then look into Nimble's output "samples" to get the values for all chains and calculate posteriors' probability in *speciesRoles/analysis/occupancy/2posteriors.R*.
+```{r, eval=FALSE}
+#ms.ms.nimble$WAIC
+ms.ms.nimble$samples
+```
+
+## Structural equation modelling 
+We used mixed model structural equation modeling (SEM) to test whether abundance, specialization, diet breath, and phenological breadth affected interaction flexibility across scales. We calculated traits from an independent data set (see supplementary information for more details). We considered all traits had a direct effect on diet breadth, as well as a direct effect on each interaction flexibility measures. We calculated interaction flexibility for each species at each site, and included random effects for site and species in our SEM. We standardized all variables included in the SEM. 
+
+To avoid circularity between traits and the variability measurements, for this part of the study we considered five sites for which we tracked community assembly. Since in these areas the community context is shifting, species are most likely to be variable.
+
+The following code is an excerpt from the *speciesRoles/analysis/variability/5piecewiseSEM.R* script for partner variability. For each of or interaction variability we first scaled the variables before fitting them to the model using the `psem` function, with random effect of species and site. We then we evaluated path significance using standardized coefficients. 
+
+```{r, eval=FALSE}
+## fit piecewise model with random effect of species and site 
+## indirect effect through rdegree, test the effect of cv
+partner.var.cv = psem(
+  r.degree = lme(r.degree ~ median.abund + median.days + Lecty, 
+                 random = ~ 1 | Site/GenusSpecies, data = partner.path.data),
+  cv.dist = lme(cv.partner ~ median.abund + median.days + r.degree + Lecty, 
+                random = ~ 1 | Site/GenusSpecies, data = partner.path.data))
+
+# Evaluate path significance 
+summary(partner.var.cv)
+```
+
+The results we got from the effect of traits on partner variability coefficient of variation:
+```{r, echo=FALSE, message=FALSE}
+library(piecewiseSEM)
+load('~/Dropbox/speciesRoles/analysis/variability/saved/mods/pathresults.Rdata')
+summary(partner.var.cv)
+```
+
+
+## Debugging the efing models 
+
+`git checkout bce3f58564408b6edbb723f79d26692b3d3fe67e` - Date from Jul 21st 2019, *run all analysis again, results back to old with var role being significant* - they all work!
+
+Checking of with the 2019 data of role the current occupancy works. It does not! It's something with the model! Partner and all run!
+
+Checking the `git checkout b6a0d4c537b3c1084802e56c35fd163cd4c1ae4d` from July 23rd 2019. Testing all, partner, role, and cnodf. Also works!
+
+Checking the `f3ffbaa016dbfce23d57d8024f9b6f786ad145bb` from July 30th 2019. -> Role is not running anymore! 
+
+

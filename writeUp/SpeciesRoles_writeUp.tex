@@ -1,0 +1,478 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Pollinators more flexible in their interaction patterns persist for longer across a landscape},
+  pdfauthor={Marília P. Gaiarsa},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{float}
+
+\title{Pollinators more flexible in their interaction patterns persist
+for longer across a landscape}
+\author{Marília P. Gaiarsa}
+\date{2020-08-18}
+
+\begin{document}
+\maketitle
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+We we examine species interaction patterns using a long-term
+plant-pollinator network assembly from the central valley of California.
+We propose three complementary ways of measuring species' flexibility
+across ecological scales, and test whether interaction flexibility at
+different scales enables species to have higher occupancy across the
+landscape. We then examine which traits explain flexibility and thus,
+contribute indirectly to occupancy.
+
+All analyses are in the analyses folder within the github repo
+\href{https://github.com/lponisio/speciesRoles/tree/master/analysis}{speciesRoles}.
+The purpose of this document is to go through the main scripts for each
+analysis individually. We used R (version 3.5.1), nimble (version
+0.7.1), and piecewiseSEM (version 2.1.0).
+
+All analyses are executable from the main.sh file, and the necessary
+packages from the packages.sh file.
+
+\hypertarget{variability}{%
+\subsection{Variability}\label{variability}}
+
+The code to calculate variability is inside
+\emph{speciesRoles/analysis/variability}. We calculated three measures
+of interaction flexibility for each species, at each site, across years:
+partner, role, and structural flexibility. We only considered species
+that were seen at least three times.
+
+\hypertarget{partner-flexibility}{%
+\subsubsection{Partner flexibility}\label{partner-flexibility}}
+
+We modified methods for calculating \(\beta\)-diversity to calculate the
+flexibility of interaction partners for each species across years at a
+site (Fig. 1a of the manuscript). We use the multivariate dispersion
+method considering null communities (calculated in the \emph{1nulls.R}
+script) to control for alpha diversity. Our null model reshuffles
+interactions within communities. Then, the function
+\emph{calcBetaStatus} is executed in the \emph{2partner.R} script to
+calculate the pairwise dissimilarity between survey years at a site,
+using a dissimilarity estimator that incorporates species abundances,
+while also accounting for unobserved species (check the \emph{vegdist}
+function of the \emph{vegan} package).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dis \textless{}{-}}\StringTok{ }\KeywordTok{mapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(a, b, c, d)}
+    \KeywordTok{calcBetaStatus}\NormalTok{(}\DataTypeTok{comm=}\NormalTok{ a, }\CommentTok{\#\# observed communities}
+                   \DataTypeTok{status=}\NormalTok{ b, }\CommentTok{\#\# vector of site types}
+\NormalTok{                   dis.method, }\CommentTok{\#\# dissimilarity metric (chao)}
+                   \DataTypeTok{nulls=}\NormalTok{c, }\CommentTok{\#\# null communities}
+                   \DataTypeTok{occ=}\NormalTok{binary, }\CommentTok{\#\# binary or abundance weighted}
+                   \DataTypeTok{years=}\NormalTok{d, }\CommentTok{\#\# calculate beta div within}
+                   \DataTypeTok{sub=}\NormalTok{type,}
+                   \DataTypeTok{zscore=}\OtherTok{FALSE}\NormalTok{), }\CommentTok{\#\# use Chase method not zscores}
+    \DataTypeTok{a=}\NormalTok{comm}\OperatorTok{$}\NormalTok{comm,}
+    \DataTypeTok{b=}\NormalTok{comm}\OperatorTok{$}\NormalTok{status,}
+    \DataTypeTok{c=}\NormalTok{ nulls,}
+    \DataTypeTok{d=}\NormalTok{ comm}\OperatorTok{$}\NormalTok{comm,}
+    \DataTypeTok{SIMPLIFY=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+As our measure of partner flexibility, we then calculated the
+coefficient of variation of the dissimilarity for each species at each
+site, across years:
+
+\begin{verbatim}
+##                      GenusSpecies           Site   cv.partner
+## 1             Agapostemon texanus         Barger 1.359740e-16
+## 2             Agapostemon texanus PutahCreekForb 3.912029e-01
+## 3                 Andrena candida       Rominger 1.359740e-16
+## 4 Anthidiellum notatum robertsoni       Martinez 3.950619e-01
+## 5               Anthophora urbana           Fong 2.629012e-01
+## 6               Anthophora urbana        MullerB 4.402216e-16
+\end{verbatim}
+
+\hypertarget{role-flexibility}{%
+\subsubsection{Role flexibility}\label{role-flexibility}}
+
+We calculate role flexibility in the \emph{3role.R} script. First, we
+calculated six descriptors of species position in the network to
+characterize interaction flexibility at a meso-scale: (i) rarefied
+degree, (ii) weighted betweeness , (iii) weighted closeness, (iv) niche
+overlap, (v) species' strength, and (vi) reciprocal specialization
+(calculated in the \emph{speciesRoles/dataPrep/dataPrep.R}). We
+calculated these metrics for each species at each site, at each year. To
+account for the correlation among metrics we combined them using a
+principal component analysis (PCA). To render values comparable, we
+first scaled each metric across the dataset (see the
+\emph{src/calcPca.R} function), then calculated the PCA using the
+\emph{prcomp} function. We used each species' first principle axis
+loading (PC1) to represent species' network role across sites in each
+year.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# vector of pca loadings of interest}
+\NormalTok{metrics \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"rare.degree"}\NormalTok{, }\StringTok{"weighted.betweenness"}\NormalTok{, }\StringTok{"weighted.closeness"}\NormalTok{,}
+             \StringTok{"niche.overlap"}\NormalTok{, }\StringTok{"species.strength"}\NormalTok{, }\StringTok{"d"}\NormalTok{)}
+
+\NormalTok{pol.pca.scores \textless{}{-}}\StringTok{ }\KeywordTok{calcPcaMeanVar}\NormalTok{(}\DataTypeTok{species.roles =}\NormalTok{ pol,}\CommentTok{\#\# plants or pollinators}
+                                 \DataTypeTok{metrics =}\NormalTok{ metrics) }\CommentTok{\#\# which metrics to use }
+\end{Highlighting}
+\end{Shaded}
+
+The PCA's first axis explained 45.8\% of the variation in species'
+centrality:
+
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{~/Dropbox/speciesRoles/analysis/variability/figures/pca_all} \caption{PCA of all the species across all sites from which we calculated role variability.}\label{fig:unnamed-chunk-4}
+\end{figure}
+
+We used the mean and coefficient of variation of PC1 values across years
+to explore mean role flexibility and role variability, respectively (see
+paper for details).
+
+\begin{verbatim}
+##              GenusSpecies           Site   pca.Mean      pca.cv
+## 1     Agapostemon texanus         Barger -1.0415231 -0.30447284
+## 11    Agapostemon texanus PutahCreekForb -1.0328846 -0.22599927
+## 16 Andrena angustitarsata         Barger -1.3083297 -0.03402469
+## 19       Andrena auricoma           Fong -1.2105840 -0.04666228
+## 27        Andrena candida       FongWest -0.9562273 -0.65050149
+## 31        Andrena candida   RomingerForb -1.3275069 -0.05396288
+\end{verbatim}
+
+For role variability, this single value represents how variable in their
+network position species were, at each site, across years. If a species
+consistently has the same network position at a site across years, it
+has a low coefficient of variation in PC1 scores, and thus a low role
+variability value.
+
+\hypertarget{motif-flexibility}{%
+\subsubsection{Motif flexibility}\label{motif-flexibility}}
+
+We calculate motif flexibility in the \emph{motif.R} script. First, we
+calculated species' motif position using the `bmotif' package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# calculating the motif position }
+\NormalTok{calc.motif \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x) \{}
+  \KeywordTok{node\_positions}\NormalTok{(x, }\DataTypeTok{level=}\StringTok{"columns"}\NormalTok{, }
+                           \CommentTok{\#six\_node = TRUE,}
+                           \DataTypeTok{weights\_method =} \StringTok{"mean\_motifweights"}\NormalTok{, }
+                           \DataTypeTok{weights\_combine =} \StringTok{"mean"}\NormalTok{)\}}
+
+\NormalTok{motifs.all \textless{}{-}}\StringTok{ }\KeywordTok{lapply}\NormalTok{(nets, calc.motif)}
+\end{Highlighting}
+\end{Shaded}
+
+The PCA's fi
+
+\hypertarget{structural-variability}{%
+\subsubsection{Structural variability}\label{structural-variability}}
+
+We evaluated how much each species contributes to the maintenance of
+network structure. For each site and each year, we calculated how much
+each species contributes to network nestedness (\textit{cnodf}) using
+the , \emph{nestedcontribution} function from the bipartite package (see
+the \emph{speciesRoles/dataPrep/dataPrep.R} script). We then calculated
+the mean and the coefficient of variation of \textit{cnodf} values for
+each species ate each site, across years (see the paper for details) in
+the \emph{4nestedContr.R} script.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# calculating mean and sd per species per site}
+\NormalTok{contr.nodf.spp \textless{}{-}}\StringTok{ }\NormalTok{contr.nodf }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{group\_by}\NormalTok{(GenusSpecies, Site)  }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{cnodf.cv =} \KeywordTok{cv}\NormalTok{(nestedcontribution),}
+            \DataTypeTok{cnodf.Mean =} \KeywordTok{mean}\NormalTok{(nestedcontribution, }\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              GenusSpecies           Site    cnodf.cv cnodf.Mean
+## 13    Agapostemon texanus         Barger -1.08746025 -0.3308837
+## 22    Agapostemon texanus PutahCreekForb  1.28630221  0.2716872
+## 34 Andrena angustitarsata         Barger -0.14406268 -0.8023876
+## 40       Andrena auricoma           Fong -0.05694698 -0.6645072
+## 43        Andrena candida   RomingerForb -0.32926887 -0.8854607
+## 46        Andrena candida       Rominger -0.07494646 -0.7767051
+\end{verbatim}
+
+\hypertarget{occupancy}{%
+\subsection{Occupancy}\label{occupancy}}
+
+We first calculated flexibility for species that were seen at least
+three times in the landscape, totaling \(37\) species in N=\(39\)
+different sites. In
+\emph{speciesRoles/analysis/occupancy/src/initialize.R} are all the
+functions and scripts that prepare the data for the occupancy model, and
+the script \emph{speciesRoles/analysis/occupancy/1runModels.R} runs the
+model. To run the MCMC in order to estimate the model coefficients, we
+use the NIMBLE R package. Because Nimble is constantly being updated,
+the code below installs the version used in our analyses.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{install\_github}\NormalTok{(}\StringTok{"nimble{-}dev/nimble"}\NormalTok{, }\DataTypeTok{ref =} \StringTok{"v0.7.1"}\NormalTok{, }\DataTypeTok{subdir =} \StringTok{"packages/nimble"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(nimble)}
+\end{Highlighting}
+\end{Shaded}
+
+To explore if interaction flexibility confers advantages to populations
+we built a model including all interaction flexibilities for all species
+seen at least three times across the landscape (N=\(37\)). We calculated
+species colonization and persistence for each species at each site over
+\(10\) years (2006-2015) using a multi-season, multi-species occupancy
+model. We modeled the probability of occupancy for species \textit{i} at
+site \textit{j} as a function of colonization (\(\gamma_{ij}\)) and
+persistence (\(\phi_{ij}\)), including a random intercept of species and
+explanatory variables for the flexibility across scales. We then
+calculated the average equilibrium occupancy across the landscape as
+\[\gamma_{ij}/(1-\phi_{ij} + \gamma_{ij})\]
+
+The code below is an excerpt from the \emph{1runModels.R} script.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{type \textless{}{-}}\StringTok{ "all"}
+\CommentTok{\#\# define params based on type of model }
+\NormalTok{ms.ms.occ \textless{}{-}}\StringTok{ }\KeywordTok{setModel}\NormalTok{(type)}
+\NormalTok{  model.input \textless{}{-}}\StringTok{ }\KeywordTok{setup}\NormalTok{(type, model.input)}
+\NormalTok{  ms.ms.model \textless{}{-}}\StringTok{ }\KeywordTok{nimbleModel}\NormalTok{(}
+    \DataTypeTok{code =}\NormalTok{ ms.ms.occ,}
+    \DataTypeTok{constants =}\NormalTok{ model.input}\OperatorTok{$}\NormalTok{constants,}
+    \DataTypeTok{data =}\NormalTok{ model.input}\OperatorTok{$}\NormalTok{data,}
+    \DataTypeTok{inits =}\NormalTok{ model.input}\OperatorTok{$}\NormalTok{inits,}
+    \DataTypeTok{check =} \OtherTok{FALSE}\NormalTok{,}
+    \DataTypeTok{calculate =} \OtherTok{FALSE}
+\NormalTok{  )}
+\NormalTok{  C.model \textless{}{-}}\StringTok{ }\KeywordTok{compileNimble}\NormalTok{(ms.ms.model)}
+  \CommentTok{\#\# configure and build mcmc}
+\NormalTok{    mcmc.spec \textless{}{-}}\StringTok{ }\KeywordTok{configureMCMC}\NormalTok{(ms.ms.model,}
+                               \DataTypeTok{print =} \OtherTok{FALSE}\NormalTok{,}
+                               \DataTypeTok{monitors =}
+\NormalTok{                                   C.model}\OperatorTok{$}\KeywordTok{getNodeNames}\NormalTok{(}\DataTypeTok{stochOnly =} \OtherTok{TRUE}\NormalTok{,}
+                                                        \DataTypeTok{includeData =} \OtherTok{FALSE}\NormalTok{),}
+                               \DataTypeTok{enableWAIC =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{    mcmc \textless{}{-}}\StringTok{ }\KeywordTok{buildMCMC}\NormalTok{(mcmc.spec,}
+                      \DataTypeTok{enableWAIC =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{    C.mcmc \textless{}{-}}\StringTok{ }\KeywordTok{compileNimble}\NormalTok{(mcmc, }\DataTypeTok{project =}\NormalTok{ ms.ms.model)}
+    \CommentTok{\#\# run model}
+\NormalTok{    ms.ms.nimble \textless{}{-}}\StringTok{ }\KeywordTok{runMCMC}\NormalTok{(C.mcmc,}
+                            \DataTypeTok{niter =}\NormalTok{ niter,}
+                            \DataTypeTok{nchains =}\NormalTok{ nchain,}
+                            \DataTypeTok{nburnin =}\NormalTok{ burnin,}
+                            \DataTypeTok{WAIC=}\OtherTok{TRUE}\NormalTok{)}
+    \KeywordTok{runMCMCcheckChains}\NormalTok{(ms.ms.nimble}\OperatorTok{$}\NormalTok{samples, }\DataTypeTok{type =}\NormalTok{ type)}
+    \CommentTok{\#\# saves output}
+    \KeywordTok{save}\NormalTok{(ms.ms.nimble, model.input,}
+         \DataTypeTok{file =} \KeywordTok{file.path}\NormalTok{(save.dir,}
+                          \KeywordTok{sprintf}\NormalTok{(}\StringTok{"ms{-}ms{-}samples{-}\%s.Rdata"}\NormalTok{,}
+\NormalTok{                                  type)))}
+\end{Highlighting}
+\end{Shaded}
+
+We then look into Nimble's output ``samples'' to get the values for all
+chains and calculate posteriors' probability in
+\emph{speciesRoles/analysis/occupancy/2posteriors.R}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ms.ms.nimble$WAIC}
+\NormalTok{ms.ms.nimble}\OperatorTok{$}\NormalTok{samples}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{structural-equation-modelling}{%
+\subsection{Structural equation
+modelling}\label{structural-equation-modelling}}
+
+We used mixed model structural equation modeling (SEM) to test whether
+abundance, specialization, diet breath, and phenological breadth
+affected interaction flexibility across scales. We calculated traits
+from an independent data set (see supplementary information for more
+details). We considered all traits had a direct effect on diet breadth,
+as well as a direct effect on each interaction flexibility measures. We
+calculated interaction flexibility for each species at each site, and
+included random effects for site and species in our SEM. We standardized
+all variables included in the SEM.
+
+To avoid circularity between traits and the variability measurements,
+for this part of the study we considered five sites for which we tracked
+community assembly. Since in these areas the community context is
+shifting, species are most likely to be variable.
+
+The following code is an excerpt from the
+\emph{speciesRoles/analysis/variability/5piecewiseSEM.R} script for
+partner variability. For each of or interaction variability we first
+scaled the variables before fitting them to the model using the
+\emph{psem} function, with random effect of species and site. We then we
+evaluated path significance using standardized coefficients.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# fit piecewise model with random effect of species and site }
+\CommentTok{\#\# indirect effect through rdegree, test the effect of cv}
+\NormalTok{partner.var.cv =}\StringTok{ }\KeywordTok{psem}\NormalTok{(}
+  \DataTypeTok{r.degree =} \KeywordTok{lme}\NormalTok{(r.degree }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{median.abund }\OperatorTok{+}\StringTok{ }\NormalTok{median.days }\OperatorTok{+}\StringTok{ }\NormalTok{Lecty, }
+                 \DataTypeTok{random =} \OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{Site}\OperatorTok{/}\NormalTok{GenusSpecies, }\DataTypeTok{data =}\NormalTok{ partner.path.data),}
+  \DataTypeTok{cv.dist =} \KeywordTok{lme}\NormalTok{(cv.partner }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{median.abund }\OperatorTok{+}\StringTok{ }\NormalTok{median.days }\OperatorTok{+}\StringTok{ }\NormalTok{r.degree }\OperatorTok{+}\StringTok{ }\NormalTok{Lecty, }
+                \DataTypeTok{random =} \OperatorTok{\textasciitilde{}}\StringTok{ }\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{Site}\OperatorTok{/}\NormalTok{GenusSpecies, }\DataTypeTok{data =}\NormalTok{ partner.path.data))}
+
+\CommentTok{\# Evaluate path significance }
+\KeywordTok{summary}\NormalTok{(partner.var.cv)}
+\end{Highlighting}
+\end{Shaded}
+
+The results we got from the effect of traits on partner variability
+coefficient of variation:
+
+\begin{verbatim}
+## 
+## Structural Equation Model of partner.var.cv 
+## 
+## Call:
+##   r.degree ~ median.abund + median.days + Lecty
+##   cv.partner ~ median.abund + median.days + r.degree + Lecty
+## 
+##     AIC      BIC
+##  30.000   59.554
+## 
+## ---
+## Tests of directed separation:
+## 
+##  No independence claims present. Tests of directed separation not possible.
+## 
+## Global goodness-of-fit:
+## 
+##   Fisher's C = 0 with P-value = 1 and on 0 degrees of freedom
+## 
+## ---
+## Coefficients:
+## 
+##     Response    Predictor Estimate Std.Error DF Crit.Value P.Value Std.Estimate
+##     r.degree median.abund   0.8107    0.0423 45    19.1623  0.0000       0.8107
+##     r.degree  median.days   0.2347    0.0428 45     5.4837  0.0000       0.2347
+##     r.degree        Lecty  -0.0040    0.0359 45    -0.1124  0.9110      -0.0040
+##   cv.partner median.abund   0.7516    0.4797 44     1.5668  0.1243       0.7516
+##   cv.partner  median.days   0.1378    0.2115 44     0.6514  0.5182       0.1378
+##   cv.partner     r.degree  -0.4898    0.5558 44    -0.8813  0.3829      -0.4898
+##   cv.partner        Lecty  -0.1269    0.1397 44    -0.9087  0.3685      -0.1269
+##      
+##   ***
+##   ***
+##      
+##      
+##      
+##      
+##      
+## 
+##   Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05
+## 
+## ---
+## Individual R-squared:
+## 
+##     Response method Marginal Conditional
+##     r.degree   none     0.94           1
+##   cv.partner   none     0.18           1
+\end{verbatim}
+
+\end{document}

@@ -1,0 +1,36 @@
+% latex table generated in R 4.0.2 by xtable 1.8-4 package
+% Fri Nov 20 11:56:49 2020
+\begin{table}[ht]
+\centering
+\begin{tabular}{lllrrrrrrl}
+  \hline
+var & Response & Predictor & Estimate & Std.Error & DF & Crit.Value & P.Value & Std.Estimate & Var.10 \\ 
+  \hline
+Mean Partner & diet breadth & abund. & 0.72 & 0.06 & 42.00 & 12.65 & 0.00 & 0.72 & *** \\ 
+  Mean Partner & diet breadth & phenology & 0.30 & 0.06 & 42.00 & 5.01 & 0.00 & 0.30 & *** \\ 
+  Mean Partner & diet breadth & speciallization & 0.04 & 0.05 & 42.00 & 0.80 & 0.43 & 0.04 &  \\ 
+  Mean Partner & diet breadth & body size & -0.05 & 0.05 & 42.00 & -0.92 & 0.36 & -0.05 &  \\ 
+  Mean Partner & Partner var. & abund. & 0.07 & 0.18 & 42.00 & 0.37 & 0.71 & 0.07 &  \\ 
+  Mean Partner & Partner var. & phenology & 0.44 & 0.19 & 42.00 & 2.33 & 0.02 & 0.44 & * \\ 
+  Mean Partner & Partner var. & speciallization & -0.05 & 0.15 & 42.00 & -0.31 & 0.76 & -0.05 &  \\ 
+  Mean Partner & Partner var. & body size & 0.52 & 0.17 & 42.00 & 3.00 & 0.00 & 0.52 & ** \\ 
+  Mean Role & diet breadth & abund. & 0.72 & 0.06 & 42.00 & 12.65 & 0.00 & 0.72 & *** \\ 
+  Mean Role & diet breadth & phenology & 0.30 & 0.06 & 42.00 & 5.01 & 0.00 & 0.30 & *** \\ 
+  Mean Role & diet breadth & speciallization & 0.04 & 0.05 & 42.00 & 0.80 & 0.43 & 0.04 &  \\ 
+  Mean Role & diet breadth & body size & -0.05 & 0.05 & 42.00 & -0.92 & 0.36 & -0.05 &  \\ 
+  Mean Role & Role var. & abund. & 0.22 & 0.14 & 42.00 & 1.52 & 0.14 & 0.22 &  \\ 
+  Mean Role & Role var. & phenology & 0.39 & 0.15 & 42.00 & 2.60 & 0.01 & 0.39 & * \\ 
+  Mean Role & Role var. & speciallization & -0.10 & 0.12 & 42.00 & -0.80 & 0.43 & -0.10 &  \\ 
+  Mean Role & Role var. & body size & -0.16 & 0.14 & 42.00 & -1.17 & 0.25 & -0.16 &  \\ 
+  Mean Struct. & diet breadth & abund. & 0.70 & 0.06 & 42.00 & 12.34 & 0.00 & 0.70 & *** \\ 
+  Mean Struct. & diet breadth & phenology & 0.31 & 0.06 & 42.00 & 4.89 & 0.00 & 0.31 & *** \\ 
+  Mean Struct. & diet breadth & speciallization & 0.04 & 0.05 & 42.00 & 0.90 & 0.37 & 0.04 &  \\ 
+  Mean Struct. & diet breadth & body size & -0.07 & 0.06 & 42.00 & -1.24 & 0.22 & -0.07 &  \\ 
+  Mean Struct. & Structural var. & abund. & 0.15 & 0.32 & 41.00 & 0.47 & 0.64 & 0.15 &  \\ 
+  Mean Struct. & Structural var. & phenology & -0.05 & 0.21 & 41.00 & -0.25 & 0.81 & -0.05 &  \\ 
+  Mean Struct. & Structural var. & diet breadth & 0.43 & 0.41 & 41.00 & 1.05 & 0.30 & 0.43 &  \\ 
+  Mean Struct. & Structural var. & speciallization & 0.02 & 0.13 & 41.00 & 0.13 & 0.90 & 0.02 &  \\ 
+  Mean Struct. & Structural var. & body size & -0.19 & 0.16 & 41.00 & -1.19 & 0.24 & -0.19 &  \\ 
+   \hline
+\end{tabular}
+\end{table}
