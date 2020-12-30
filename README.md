@@ -1,2 +1,2 @@
 # Interaction Flexibility
-Project looking at the variability of pollinator interactions by Gaiarsa, Kremen & Ponisio (*Opposing effects of pollinators interaction flexibility on patch occupancy*). Refer to the writeup folder for a RMarkdown document with a description of the analysis. 
+Project looking at the variability of pollinator interactions by Gaiarsa, Kremen & Ponisio (*Opposing effects of pollinators interaction flexibility on patch occupancy*). Refer to the writeup folder for a RMarkdown document with a description of the analysis ([here](file:///Users/magaiarsa/Dropbox/speciesRoles_NEE/intFlex/writeUp/SpeciesRoles_writeUp.html) is the stable html). 
