@@ -11,7 +11,7 @@
 
 <meta name="author" content="Marília P. Gaiarsa" />
 
-<meta name="date" content="2020-12-29" />
+<meta name="date" content="2020-12-30" />
 
 <title>Opposing effects of pollinators interaction flexibility on patch occupancy</title>
 
@@ -181,7 +181,7 @@ summary {
 
 <h1 class="title toc-ignore">Opposing effects of pollinators interaction flexibility on patch occupancy</h1>
 <h4 class="author">Marília P. Gaiarsa</h4>
-<h4 class="date">2020-12-29</h4>
+<h4 class="date">2020-12-30</h4>
 
 </div>
 
@@ -192,26 +192,21 @@ text-align: justify}
 </style>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
-<p>We we examine species interaction patterns using a long-term plant-pollinator network assembly from the central valley of California. We propose three complementary ways of measuring species’ flexibility across ecological scales, and test whether interaction flexibility at different scales enables species to have higher occupancy across the landscape. We then examine which traits explain flexibility and thus, contribute indirectly to occupancy.</p>
+<p>We we examine species interaction patterns using a long-term plant-pollinator network assembly from the central valley of California. We propose three complementary ways of measuring species’ flexibility across ecological scales: partner variability (micro-scale), network role variability (meso-scale), and network structural variability (macro-scale). We then test whether interaction flexibility at different scales enables species to have higher occupancy across the landscape. Finally, we examine which traits explain flexibility and thus, contribute indirectly to occupancy.</p>
 <p>All analyses are in the analyses folder within the github repo <a href="https://github.com/Magaiarsa/intFlex">intFlex</a>. The purpose of this document is to go through the main scripts for each analysis individually. We used R (version 4.0.2), nimble (version 0.7.1), and piecewiseSEM (version 2.1.0).</p>
-<p>All analyses are executable from the main.sh file, and the necessary packages from the packages.sh file.</p>
 <div id="variability" class="section level2">
 <h2>Variability</h2>
-<p>The code to calculate variability is inside <em>/analysis/variability</em>. We calculated three measures of interaction flexibility for each species, at each site, across years: partner, role, and structural flexibility. We only considered species that were seen at least three times.</p>
-<div id="partner-flexibility" class="section level3">
-<h3>Partner flexibility</h3>
-<p>We modified methods for calculating <span class="math inline">\(\beta\)</span>-diversity to calculate the flexibility of interaction partners for each species across years at a site (Fig. 1a of the manuscript). We use the multivariate dispersion method considering null communities (calculated in the <em>1nulls.R</em> script) to control for alpha diversity. Our null model reshuffles interactions within communities. Then, the function <em>calcBetaStatus</em> is executed in the <em>2partner.R</em> script to calculate the pairwise dissimilarity between survey years at a site, using a dissimilarity estimator that incorporates species abundances, while also accounting for unobserved species (check the <code>vegdist</code> function of the <code>vegan</code> package).</p>
-<pre class="r"><code>dis &lt;- mapply(function(a, b, c, d)
+<p>The code to calculate variability is inside <code>/analysis/variability</code>. We calculated three measures of interaction flexibility for each species, at each site, across years: partner, role, and structural flexibility. We only considered species that were seen at least three different years in a site, sites that were samples at least three separate years, and also networks (combinatiosn of site x year) that had at least five plants and five pollinators.</p>
+<div id="partner-variability" class="section level3">
+<h3>Partner variability</h3>
+<p>We modified methods for calculating <span class="math inline">\(\beta\)</span>-diversity to calculate the flexibility of interaction partners for each species across years at a site (Fig. 1a of the manuscript). We use the multivariate dispersion method considering null communities (calculated in the <code>1nulls.R</code> script) to control for alpha diversity. For each species at each site, across all years, the null model reshuffles interactions to estimate the extent to which the observed dissimilarity deviated from that which would be expected under a random process. Then, the function <code>calcBetaStatus</code> is executed in the <code>2partner.R</code>. The function <code>calcBetaStatus</code> first corrects the dissimilarity values for each species at each site, then calculates the multivariate dispersion of interaction, using a dissimilarity estimator that incorporates species abundances (Chao), while also accounting for unobserved species (check the <code>vegdist</code> function of the <code>vegan</code> package).</p>
+<pre class="r"><code>dis &lt;- mapply(function(a, c, d)
     calcBetaStatus(comm= a, ## observed communities
-                   status= b, ## vector of site types
                    dis.method, ## dissimilarity metric (chao)
-                   nulls=c, ## null communities
-                   occ=binary, ## binary or abundance weighted
-                   years=d, ## calculate beta div within
-                   sub=type,
-                   zscore=FALSE), ## use Chase method not zscores
+                   nulls=c, ## null communities calculates in the 1nulls.R script
+                   occ=binary, ## false (quantitative networks)
+                   zscore=zscore), ## use zscores to correct the dissimilarity values
     a=comm$comm,
-    b=comm$status,
     c= nulls,
     d= comm$comm,
     SIMPLIFY=FALSE)</code></pre>
@@ -224,50 +219,53 @@ text-align: justify}
 ## 5 Barger Halictus tripartitus 0.25064970
 ## 6 Barger     Hylaeus mesillae 0.86133723</code></pre>
 </div>
-<div id="motif-flexibility" class="section level3">
-<h3>Motif flexibility</h3>
-<p>We calculate motif flexibility in the <em>motif.R</em> script. First, we calculated species’ motif position using the <code>node_positions</code> function from the <code>bmotif</code> package for all networks (nets) included in the analysis:</p>
+<div id="role-variability" class="section level3">
+<h3>Role variability</h3>
+<p>To characterize the roles that a species can play in their networks, we employed a network motifs approach. In the <code>dataPrep/dataPrep.R</code> file we calculated the motif positions of each species at each site and year. We used the <code>node_positions</code> function from the <code>bmotif</code> package. To control for the fact that species that have more interactions tend to appear in more motif positions, we normalized the data using the mean motif weights:</p>
 <pre class="r"><code>## calculating the motif position 
 calc.motif &lt;- function(x) {
   node_positions(x, level=&quot;columns&quot;, 
-                           #six_node = TRUE,
-                           weights_method = &quot;mean_motifweights&quot;, 
-                           weights_combine = &quot;mean&quot;)}
+                     six_node = FALSE,
+                     weights_method = &quot;mean_motifweights&quot;, 
+                     weights_combine = &quot;mean&quot;)}
 
-motifs.all &lt;- lapply(nets, calc.motif)</code></pre>
-<p>Because weighted methods are not available for six node motifs we considered the five node motifs to be able to include weights, resulting in 46 unique node positions for each species, in each network. Each species in each network has a <span class="math inline">\(46\)</span> dimensional vector informing the frequency with which the species occurs in each position. Thus, for each species at each site, each point represents the role of species in n-dimensional motif space in a particular year, where each dimension is the frequency with which the species occurs in a particular position within a motif. We then calculated the variability in motif positions of each species (motif flexibility) as the volume of the convex hull around the points in motif space:</p>
+motifs.all &lt;- lapply(nets, calc.motif) ## nets is the list of networks included in the analysis</code></pre>
+<p>From this data, in the <code>3motifs.R</code> script we first wrangle the data so that we have a dataframe in which the columns are the motif positions, and the rows are the different years. We create one dataframe for each species at a site. We then calculate the dissimilarity in motif positions across years, for each species at each site. Thus, each point represents the role of species in n-dimensional motif space in a particular year, where each dimension is the frequency with which the species occurs in a particular position within a motif. We used the altGower index in the vegdist function to calculate dissimilarity, and then quantified the multivariate dispersion of motif positions. Finally, we calculated motif role variability as the coefficient of variation of the distance from the centroid, for each species at each site.</p>
 <pre class="r"><code>## for each site and species we created a &quot;community matrix&quot; with years as rows and motif positions as columns
-beta.spp &lt;- betadisper(vegdist(comu, na.rm = TRUE, method = &quot;bray&quot;), 
-                group=rep(&quot;all&quot;, nrow(comu)), 
-                type=&quot;centroid&quot;)
-
-## then we measured the area of polygon
-area.motif.dist &lt;- lapply(beta.spp, function(x) areapl(x$vectors))</code></pre>
+dis.motif &lt;- mapply(function(a)
+  calcBetaStatusMotif(comm= a, ## observed communities
+                      dis.method, ## dissimilarity metric
+                      occ=FALSE), ## 
+  a= comm.motif,
+  SIMPLIFY=FALSE)</code></pre>
+<p>As our measure of role flexibility, we then calculated the coefficient of variation of the dissimilarity for each species at each site, across years:</p>
+<pre><code>##     Site         GenusSpecies    pca.cv
+## 1 Barger  Agapostemon texanus 0.4456127
+## 2 Barger   Bombus melanopygus 0.4330127
+## 3 Barger     Ceratina acantha 0.8075050
+## 4 Barger     Halictus ligatus 0.6076791
+## 5 Barger Halictus tripartitus 0.3358022
+## 6 Barger     Hylaeus mesillae 0.2901273</code></pre>
 </div>
 <div id="structural-variability" class="section level3">
 <h3>Structural variability</h3>
-<p>We evaluated how much each species contributes to the maintenance of network structure. For each site and each year, we calculated how much each species contributes to network nestedness () using the , <code>nestedcontribution</code> function from the <code>bipartite</code> package (see the <em>dataPrep/dataPrep.R</em> script). We then calculated the mean and the coefficient of variation of  values for each species ate each site, across years (see the paper for details) in the <em>4nestedContr.R</em> script.</p>
-<pre class="r"><code>## calculating mean and sd per species per site
-contr.nodf.spp &lt;- contr.nodf %&gt;%
-  group_by(GenusSpecies, Site)  %&gt;%
-  summarize(cnodf.cv = cv(nestedcontribution),
-            cnodf.Mean = mean(nestedcontribution, na.rm=TRUE))</code></pre>
-<pre><code>##                      GenusSpecies     Site   cnodf.cv cnodf.Mean
-## 1             Agapostemon texanus   Barger 0.18177193   1.790394
-## 2                 Andrena candida Rominger 0.08540196   1.256604
-## 3 Anthidiellum notatum robertsoni Martinez 0.32579315   2.010140
-## 4               Anthophora urbana     Fong 0.15747936   1.949819
-## 5               Anthophora urbana Martinez 0.16264825   1.657282
-## 6               Anthophora urbana  MullerB 0.42718219   1.949952</code></pre>
+<p>We evaluated how much each species contributes to the maintenance of network structure. For each site and each year, we calculated how much each species contributes to network nestedness () using the , <code>nestedcontribution</code> function from the <code>bipartite</code> package (see the <code>dataPrep/dataPrep.R</code> script). We then calculated the mean and the coefficient of variation of  values for each species ate each site, across years in the <code>4nestedContr.R</code> script.</p>
+<pre><code>##                      GenusSpecies     Site   cnodf.cv
+## 1             Agapostemon texanus   Barger 0.18177193
+## 2                 Andrena candida Rominger 0.08540196
+## 3 Anthidiellum notatum robertsoni Martinez 0.32579315
+## 4               Anthophora urbana     Fong 0.15747936
+## 5               Anthophora urbana Martinez 0.16264825
+## 6               Anthophora urbana  MullerB 0.42718219</code></pre>
 </div>
 </div>
 <div id="occupancy" class="section level2">
 <h2>Occupancy</h2>
-<p>We first calculated flexibility for species that were seen at least three times in the landscape, totaling <span class="math inline">\(37\)</span> species in N=<span class="math inline">\(39\)</span> different sites. In <em>analysis/occupancy/src/initialize.R</em> are all the functions and scripts that prepare the data for the occupancy model, and the script <em>analysis/occupancy/1runModels.R</em> runs the model. To run the MCMC in order to estimate the model coefficients, we use the NIMBLE R package. Because Nimble is constantly being updated, the code below installs the version used in our analyses.</p>
+<p>We used a multi-season, multi-species occupancy model to test the effect of each interaction flexibility metric on species’ colonization and persistence in the landscape. In <code>analysis/occupancy/src/initialize.R</code> are all the functions and scripts that prepare the data for the occupancy model, and the script <code>analysis/occupancy/1runModels.R</code> runs the model. To run the MCMC in order to estimate the model coefficients, we use the NIMBLE R package. Because Nimble is constantly being updated, the code below installs the version used in our analyses.</p>
 <pre class="r"><code>library(devtools)
 install_github(&quot;nimble-dev/nimble&quot;, ref = &quot;v0.7.1&quot;, subdir = &quot;packages/nimble&quot;)
 library(nimble)</code></pre>
-<p>To explore if interaction flexibility confers advantages to populations we built a model including all interaction flexibilities for all species seen at least three times across the landscape (N=<span class="math inline">\(37\)</span>). We calculated species colonization and persistence for each species at each site over <span class="math inline">\(10\)</span> years (2006-2015) using a multi-season, multi-species occupancy model. We modeled the probability of occupancy for species  at site  as a function of colonization (<span class="math inline">\(\gamma_{ij}\)</span>) and persistence (<span class="math inline">\(\phi_{ij}\)</span>), including a random intercept of species and explanatory variables for the flexibility across scales. We then calculated the average equilibrium occupancy across the landscape as <span class="math display">\[\gamma_{ij}/(1-\phi_{ij} + \gamma_{ij})\]</span></p>
+<p>We modeled the probability of occupancy for species  at site  as a function of colonization (<span class="math inline">\(\gamma_{ij}\)</span>) and persistence (<span class="math inline">\(\phi_{ij}\)</span>), including a random intercept of species and explanatory variables for the flexibility across scales. We then calculated the average equilibrium occupancy across the landscape as <span class="math display">\[\gamma_{ij}/(1-\phi_{ij} + \gamma_{ij})\]</span></p>
 <p>The code below is an excerpt from the <em>1runModels.R</em> script.</p>
 <pre class="r"><code>type &lt;- &quot;all&quot;
 ## define params based on type of model 
@@ -304,25 +302,33 @@ ms.ms.occ &lt;- setModel(type)
          file = file.path(save.dir,
                           sprintf(&quot;ms-ms-samples-%s.Rdata&quot;,
                                   type)))</code></pre>
-<p>We then look into Nimble’s output “samples” to get the values for all chains and calculate posteriors’ probability in <em>analysis/occupancy/2posteriors.R</em>.</p>
-<pre class="r"><code>#ms.ms.nimble$WAIC
-ms.ms.nimble$samples</code></pre>
+<p>We then look into Nimble’s output “samples” to get the values for all chains and calculate posteriors’ probability in <code>analysis/occupancy/2posteriors.R</code>. In this script we create the Figure 3 from the paper, and also the posterior tables with the confidence intervals.</p>
 </div>
 <div id="structural-equation-models" class="section level2">
 <h2>Structural equation models</h2>
-<p>We used mixed model structural equation modeling (SEM) to test whether abundance, specialization, diet breath, and phenological breadth affected interaction flexibility across scales. We calculated traits from an independent data set (see supplementary information for more details). We considered all traits had a direct effect on diet breadth, as well as a direct effect on each interaction flexibility measures. We calculated interaction flexibility for each species at each site, and included random effects for site and species in our SEM. We standardized all variables included in the SEM.</p>
+<p>We used mixed model structural equation modeling (SEM) to test whether abundance, specialization, diet breath, body size, and phenological breadth affected interaction flexibility across scales. We calculated traits from an independent data set (see supplementary information for more details). We considered all traits had a direct effect on diet breadth, as well as a direct effect on each interaction flexibility measures. We calculated interaction flexibility for each species at each site, and included random effects for site and species in our SEM.</p>
 <p>To avoid circularity between traits and the variability measurements, for this part of the study we considered five sites for which we tracked community assembly. Since in these areas the community context is shifting, species are most likely to be variable.</p>
 <p>The following code is an excerpt from the <em>analysis/variability/5piecewiseSEM.R</em> script for partner variability. For each of or interaction variability we first scaled the variables before fitting them to the model using the <code>psem</code> function, with random effect of species and site. We then we evaluated path significance using standardized coefficients.</p>
 <pre class="r"><code>## fit piecewise model with random effect of species and site 
 ## indirect effect through rdegree, test the effect of cv
 partner.var.cv = psem(
-  r.degree = lme(r.degree ~ median.abund + median.days + Lecty, 
-                 random = ~ 1 | Site/GenusSpecies, data = partner.path.data),
-  cv.dist = lme(cv.partner ~ median.abund + median.days + r.degree + Lecty, 
-                random = ~ 1 | Site/GenusSpecies, data = partner.path.data))
+  r.degree = lme(r.degree ~ median.abund + median.days + Lecty + MeanITD,
+                 random = ~ 1 | Site/GenusSpecies,
+                 data = path.variables$partner),
+  cv.dist = lme(cv.partner ~ median.abund + median.days+ r.degree  + Lecty + MeanITD,
+                random = ~ 1 | Site/GenusSpecies,
+                data = path.variables$partner)) 
 
-# Evaluate path significance 
-summary(partner.var.cv)</code></pre>
+## To plot
+export_graph(plot(partner.var.cv, return = TRUE), 
+               file_name = file.path(s.path.fig,&quot;path_MeanPartner.pdf&quot;),file_type = &quot;pdf&quot;)</code></pre>
+<p>Below is the ugly plot provided buy the package, which we then refined in Inkscape to make the Supplementary Figure.</p>
+<div class="figure">
+<img src="/Users/magaiarsa/Downloads/path_CVpartner.png" alt="A caption" width="70%" />
+<p class="caption">
+A caption
+</p>
+</div>
 </div>
 </div>
 
