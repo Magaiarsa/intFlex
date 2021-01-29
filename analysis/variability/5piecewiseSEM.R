@@ -103,16 +103,9 @@ rownames(path.results.all) <- NULL
 
 ## renaming stuff to make my life easier 
 ## variables
-if(use.mean){
-  path.results.all$var[path.results.all$var== "partner.var.cv"] <- "Mean Partner"
-  path.results.all$var[path.results.all$var== "role.var.cv"] <- "Mean Role"
-  path.results.all$var[path.results.all$var== "cnodf.var.cv"] <- "Mean Struct."
-  
-}else{
-  path.results.all$var[path.results.all$var== "partner.var.cv"] <- "Partner var."
-  path.results.all$var[path.results.all$var== "role.var.cv"] <- "Role var."
-  path.results.all$var[path.results.all$var== "cnodf.var.cv"] <- "Struct var."
-}
+path.results.all$var[path.results.all$var== "partner.var.cv"] <- "Partner var."
+path.results.all$var[path.results.all$var== "role.var.cv"] <- "Role var."
+path.results.all$var[path.results.all$var== "cnodf.var.cv"] <- "Struct var."
 
 ## responses 
 path.results.all$Response[path.results.all$Response== "r.degree"] <- "diet breadth"
@@ -127,11 +120,6 @@ path.results.all$Predictor[path.results.all$Predictor== "Lecty"] <- "specialliza
 path.results.all$Predictor[path.results.all$Predictor== "MeanITD"] <- "body size"
 path.results.all$Predictor[path.results.all$Predictor== "r.degree"] <- "diet breadth"
 
-if(use.mean){
-  print(xtable(path.results.all, type = "latex"), include.rownames=FALSE, 
-        file = "saved/pathResultsTableMean.txt")
-}else{
-  print(xtable(path.results.all, type = "latex"), include.rownames=FALSE, 
+print(xtable(path.results.all, type = "latex"), include.rownames=FALSE, 
         file = "saved/pathResultsTableCV.txt")
-}
 
